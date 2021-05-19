@@ -50,7 +50,7 @@ export default Detail;
 const Container = styled.div`
   min-height: calc(100vh - 70px);
   padding: 0 calc(0.35vw + 5px);
-  position: absolute;
+  position: relative;
 `;
 
 const Background = styled.div`
@@ -135,13 +135,13 @@ const GroupButton = styled(AddButton)`
 const Subtitle = styled.div`
   color: rgb(249, 249, 249);
   min-height: 30ox;
-  font-size: 15px;
+  font-size: 20px;
   margin-top: 20px;
 `;
 
 const Description = styled.div`
   line-height: 1.4;
-  font-size: 20px;
+  font-size: 15px;
   margin-top: 16px;
   color: rgb(249, 249, 249);
 `;
