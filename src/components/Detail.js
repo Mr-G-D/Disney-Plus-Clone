@@ -3,47 +3,43 @@ import styled from "styled-components";
 
 function Detail() {
   return (
-    <div>
-      <Container>
-        <Background>
-          <img
-            src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4F39B7E16726ECF419DD7C49E011DD95099AA20A962B0B10AA1881A70661CE45/scale?width=1440&aspectRatio=1.78&format=jpeg"
-            alt=""
-          />
-        </Background>
-        <ImageTitle>
-          <img
-            src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78"
-            alt=""
-          />
-        </ImageTitle>
-        <Controls>
-          <PlayButton>
-            <img src="/images/play-icon-black.png" alt="" /> <span>PLAY</span>
-          </PlayButton>
-          <TrailerButton>
-            <img src="/images/play-icon-white.png" alt="" />{" "}
-            <span>TRAILER</span>
-          </TrailerButton>
-          <AddButton>
-            <span>+</span>
-          </AddButton>
-          <GroupButton>
-            <img src="/images/group-icon.png" alt="" />
-          </GroupButton>
-        </Controls>
-        <Subtitle>
-          Disney+ Clone - ReactJS Challenge (Learn Redux, React JS, Styled
-          Components, and Firebase) | Day 1
-        </Subtitle>
-        <Description>
-          Their Firebase config file is no longer available in the linked
-          folder. You may have to set up your own Firebase database and source
-          content yourself. The images and videos are in the linked folder
-          though.
-        </Description>
-      </Container>
-    </div>
+    <Container>
+      <Background>
+        <img
+          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4F39B7E16726ECF419DD7C49E011DD95099AA20A962B0B10AA1881A70661CE45/scale?width=1440&aspectRatio=1.78&format=jpeg"
+          alt=""
+        />
+      </Background>
+      <ImageTitle>
+        <img
+          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78"
+          alt=""
+        />
+      </ImageTitle>
+      <Controls>
+        <PlayButton>
+          <img src="/images/play-icon-black.png" alt="" /> <span>PLAY</span>
+        </PlayButton>
+        <TrailerButton>
+          <img src="/images/play-icon-white.png" alt="" /> <span>TRAILER</span>
+        </TrailerButton>
+        <AddButton>
+          <span>+</span>
+        </AddButton>
+        <GroupButton>
+          <img src="/images/group-icon.png" alt="" />
+        </GroupButton>
+      </Controls>
+      <Subtitle>
+        Disney+ Clone - ReactJS Challenge (Learn Redux, React JS, Styled
+        Components, and Firebase) | Day 1
+      </Subtitle>
+      <Description>
+        Their Firebase config file is no longer available in the linked folder.
+        You may have to set up your own Firebase database and source content
+        yourself. The images and videos are in the linked folder though.
+      </Description>
+    </Container>
   );
 }
 
