@@ -1,38 +1,94 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { auth, provider } from "../firebase";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+import {
+  selectUserName,
+  selectUserPhoto,
+  setUserLogin,
+  setSignOut,
+} from "../features/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function Header() {
+  const history = useHistory();
+  const userName = useSelector(selectUserName);
+  const userPhoto = useSelector(selectUserPhoto);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        dispatch(
+          setUserLogin({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+          }),
+        );
+        history.push("/");
+      }
+    });
+  }, []);
+
+  const dispatch = useDispatch();
+  const signIn = () => {
+    auth.signInWithPopup(provider).then((result) => {
+      let user = result.user;
+      dispatch(
+        setUserLogin({
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        }),
+      );
+      history.push("/");
+    });
+  };
+  const signOut = () => {
+    auth.signOut().then(() => {
+      dispatch(setSignOut());
+      history.push("/login");
+    });
+  };
   return (
     <Nav>
       <Logo src="/images/logo.svg" />
-      <NavMenu>
-        <a>
-          <img href="#" src="/images/home-icon.svg" alt="" />
-          <span>HOME</span>
-        </a>
-        <a>
-          <img href="#" src="/images/search-icon.svg" alt="" />
-          <span>SEARCH</span>
-        </a>
-        <a>
-          <img href="#" src="/images/watchlist-icon.svg" alt="" />
-          <span>WATCHLIST</span>
-        </a>
-        <a>
-          <img href="#" src="/images/original-icon.svg" alt="" />
-          <span>ORIGINALS</span>
-        </a>
-        <a>
-          <img href="#" src="/images/movie-icon.svg" alt="" />
-          <span>MOVIES</span>
-        </a>
-        <a>
-          <img href="#" src="/images/series-icon.svg" alt="" />
-          <span>SERIES</span>
-        </a>
-      </NavMenu>
+      {!userName ? (
+        <LoginContainer>
+          <Login onClick={signIn}>Login</Login>
+        </LoginContainer>
+      ) : (
+        <>
+          <NavMenu>
+            <a>
+              <img href="#" src="/images/home-icon.svg" alt="" />
+              <span>HOME</span>
+            </a>
+            <a>
+              <img href="#" src="/images/search-icon.svg" alt="" />
+              <span>SEARCH</span>
+            </a>
+            <a>
+              <img href="#" src="/images/watchlist-icon.svg" alt="" />
+              <span>WATCHLIST</span>
+            </a>
+            <a>
+              <img href="#" src="/images/original-icon.svg" alt="" />
+              <span>ORIGINALS</span>
+            </a>
+            <a>
+              <img href="#" src="/images/movie-icon.svg" alt="" />
+              <span>MOVIES</span>
+            </a>
+            <a>
+              <img href="#" src="/images/series-icon.svg" alt="" />
+              <span>SERIES</span>
+            </a>
+          </NavMenu>
 
-      <UserImg src="https://i.pravatar.cc/100" />
+          <UserImg onClick={signOut} src="https://i.pravatar.cc/100" />
+        </>
+      )}
     </Nav>
   );
 }
@@ -99,4 +155,27 @@ const UserImg = styled.img`
   width: 48px;
   height: 48px;
   border-radius: 50%;
+`;
+
+const Login = styled.div`
+  border: 1px solid #f9f9f9;
+  padding: 8px 16px;
+  border-radius: 4px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9f9f9;
+    color: #000;
+    border-color: transparent;
+  }
+`;
+
+const LoginContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 `;

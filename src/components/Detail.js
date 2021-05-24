@@ -17,7 +17,6 @@ function Detail() {
         }
       });
   }, []);
-  console.log("movie is", movie);
   return (
     <Container>
       {movie && (
