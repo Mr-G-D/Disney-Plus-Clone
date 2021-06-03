@@ -56,7 +56,6 @@ function Home() {
         <Viewer />
         <Recommends />
         <New />
-        <Originals />
         <Trendings />
       </Container>
     </div>
