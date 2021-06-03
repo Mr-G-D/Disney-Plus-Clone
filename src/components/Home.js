@@ -2,34 +2,66 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import ImgSlider from "./ImgSlider";
 import Viewer from "./Viewer";
-import Movies from "./Movies";
 import db from "../firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMovies } from "../features/movie/movieSlice";
+import Recommends from "./Recommends";
+import New from "./New";
+import Originals from "./Originals";
+import Trendings from "./Trending";
+import { selectUserName } from "../features/user/userSlice";
 
 function Home() {
   const dispatch = useDispatch();
+  const userName = useSelector(selectUserName);
+  let recommends = [];
+  let newDisney = [];
+  let originals = [];
+  let trending = [];
 
   useEffect(() => {
     db.collection("movies").onSnapshot((snapshot) => {
-      let tempMovies = snapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
+      snapshot.docs.map((doc) => {
+        switch (doc.data().type) {
+          case "recommend":
+            recommends = [...recommends, { id: doc.id, ...doc.data() }];
+            break;
+          case "new":
+            newDisney = [...newDisney, { id: doc.id, ...doc.data() }];
+            break;
+          case "trending":
+            trending = [...trending, { id: doc.id, ...doc.data() }];
+            break;
+          case "originals":
+            originals = [...originals, { id: doc.id, ...doc.data() }];
+            break;
+        }
       });
-      dispatch(setMovies(tempMovies));
+      dispatch(
+        setMovies({
+          recommend: recommends,
+          new: newDisney,
+          originals: originals,
+          trending,
+          trending,
+        }),
+      );
     });
-  });
+  }, [userName]);
 
   return (
     <div>
       <Container>
         <ImgSlider />
         <Viewer />
-        <Movies />
+        <Recommends />
+        <New />
+        <Originals />
+        <Trendings />
       </Container>
     </div>
   );
 }
-
 export default Home;
 
 const Container = styled.main`
