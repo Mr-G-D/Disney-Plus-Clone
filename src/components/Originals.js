@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { selectOriginal } from "../features/movie/movieSlice";
+import { selectOriginals } from "../features/movie/movieSlice";
 import { useSelector } from "react-redux";
 
 function Originals() {
-  const movies = useSelector(selectOriginal);
+  const movies = useSelector(selectOriginals);
   //   console.log(movies, "originals");
   return (
     <Container>
