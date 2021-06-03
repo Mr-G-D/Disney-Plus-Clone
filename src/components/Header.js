@@ -86,7 +86,7 @@ function Header() {
             </a>
           </NavMenu>
 
-          <UserImg onClick={signOut} src="https://i.pravatar.cc/100" />
+          <UserImg src={userPhoto} alt={userName} onClick={signOut} />
         </>
       )}
     </Nav>
@@ -155,6 +155,7 @@ const UserImg = styled.img`
   width: 48px;
   height: 48px;
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 const Login = styled.div`
